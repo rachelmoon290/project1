@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+  Welcome!
+{% endblock %}
+
+{% block body %}
+<div>
+  <p>
+    Please <a href = "{{ url_for('login') }}">log in</a> or <a href = "{{ url_for('signup') }}">sign up</a> to check the weather in your location.
+  </p>
+</div>
+{% endblock %}

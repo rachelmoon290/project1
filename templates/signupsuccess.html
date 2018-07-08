@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Sign Up Suceess!
+{% endblock %}
+
+{% block body %}
+<div>
+  <p>
+    Thank you for signing up {{ id }}! Please <a href = "{{ url_for('login') }}">log in</a> to continue.
+  </p>
+</div>
+{% endblock %}
