@@ -10,7 +10,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 def main():
 
-    #create table in the database
+    #create location table in the database
     db.execute("CREATE TABLE location (id SERIAL PRIMARY KEY, zipcode CHAR(5) NOT NULL, city VARCHAR NOT NULL, state VARCHAR NOT NULL, latitude DECIMAL NOT NULL, longitude DECIMAL NOT NULL, population INTEGER NOT NULL)")
 
     # open and read zipcode location file, skipping header
@@ -22,7 +22,7 @@ def main():
     for row in loc_file:
         db.execute("INSERT INTO location (zipcode, city, state, latitude, longitude, population) VALUES (:x, :y, :z, :r, :v, :f)",
                       {"x": str(row[0]).zfill(5), "y": row[1], "z": row[2], "r": row[3], "v": row[4], "f": row[5]})
-    # commit changes made and apply changes to the database
+    # apply changes to the database
     db.commit()
 
 if __name__ == "__main__":

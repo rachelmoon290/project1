@@ -36,18 +36,26 @@ def login():
 @app.route("/signupsuccess", methods=["POST"])
 def signupsuccess():
     id = request.form.get("id")
+    if db.execute("SELECT * FROM users WHERE login_id = :id", {"id": id}).rowcount == 1:
+        return render_template("error.html", message="ID already exists. Please sign up using a different ID.", url="signup")
+    db.execute("INSERT INTO users (login_id, password, firstname, lastname) VALUES (:a, :b, :c, :d)", {"a": id, "b": password, "c": firstname, "d": lastname})
+    db.commit()
     return render_template("signupsuccess.html", id = id)
+
 
 @app.route("/usermain", methods=["POST"])
 def usermain():
     id = request.form.get("id")
     password = request.form.get("password")
 
-    if db.execute("SELECT * FROM users WHERE id = :id", {"id": id}).rowcount == 0:
-        return render_template("error.html", message="ID does not exist.")
+    if db.execute("SELECT * FROM users WHERE login_id = :id", {"id": id}).rowcount == 0:
+        return render_template("error.html", message="ID does not exist. Please try again.", url="login")
 
-    elif db.execute("SELECT * FROM users WHERE id = :id and password = :pw", {"id": id, "pw": password}).rowcount == 1:
+    elif db.execute("SELECT * FROM users WHERE login_id = :id and password = :pw", {"id": id, "pw": password}).rowcount == 1:
         return render_template("usermain.html", id = id)
+
+    else return render_template("error.html", message="Wrong password. Please try again.", url="login")
+
 
 
 
