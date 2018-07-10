@@ -8,8 +8,9 @@
 <div class="form">
     <form action = "{{ url_for('usermain') }}" method="post">
       <b>ID:</b> <input name="id" type="text" placeholder=""> <br />
-      <b>Password:</b> <input name="password" type="text" placeholder=""> <br />
-    <button>Log In</button>
-  </form>
+      <b>Password:</b> <input name="password" type="password" placeholder=""> <br />
+      <button>Log In</button>
+      <a href="{{ url_for('index') }}" class="btn btn-default">Back to Homepage</a>
+    </form>
 </div>
 {% endblock %}

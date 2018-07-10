@@ -11,10 +11,10 @@ db = scoped_session(sessionmaker(bind=engine))
 def main():
 
     #create user table in the database
-    db.execute("CREATE TABLE user (id SERIAL PRIMARY KEY, login_id VARCHAR NOT NULL, password VARCHAR NOT NULL, firstname VARCHAR NOT NULL, lastname VARCHAR NOT NULL)")
+    db.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, login_id VARCHAR NOT NULL, password VARCHAR NOT NULL, firstname VARCHAR NOT NULL, lastname VARCHAR NOT NULL)")
 
     #create checkin table in the database
-    # db.execute("CREATE TABLE checkin")
+    db.execute("CREATE TABLE checkin (id SERIAL PRIMARY KEY, login_id INTEGER REFERENCES users, loc INTEGER REFERENCES location, comment VARCHAR)")
 
     # apply changes to the database
     db.commit()

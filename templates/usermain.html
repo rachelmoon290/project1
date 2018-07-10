@@ -1,11 +1,22 @@
 {% extends "layout.html" %}
 
 {% block heading %}
-  Welcome, {{ id }}!
+  Welcome, <b>{{ id }}</b>!
 {% endblock %}
 
 {% block body %}
 <div>
-
+  <p>
+    To check the weather in your location, search your location below.
+  </p>
+</div>
+<div class="form">
+    <form action = "{{ url_for('locations') }}" method="post">
+      <b>Location:</b> <input name="search" type="text" placeholder="Type ZIP code, name of city or the town." size = "50"> <br />
+      <button>Search</button>
+    </form>
+</div>
+<div>
+  <a href="{{ url_for('index') }}" class="btn btn-default">Log Out</a>
 </div>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+  Search Results: {{ location.city }}, {{ location.state }} {{ location.zipcode }}
+{% endblock %}
+
+{% block body %}
+
+  <ul>
+    <li><b>Latitude:</b> {{ location.latitude }}</li>
+    <li><b>Longitude:</b> {{ location.longitude }} </li>
+    <li><b>Population:</b> {{ location.population }} </li>
+    <li><b>Number of Checkins:</b> {{ count }}</li>
+  </ul>
+
+<h4>Comments from users who checked in:</h4>
+
+<table class="table table-striped">
+    <tbody>
+        {% for checkin in checkins %}
+        <tr>
+            <td>{{ checkin.comment }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td>No comments in this location.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div>
+  <a href="{{ url_for('index') }}" class="btn btn-default">Log Out</a>
+</div>
+
+{% endblock %}
