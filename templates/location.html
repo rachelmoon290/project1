@@ -13,23 +13,35 @@
     <li><b>Number of Checkins:</b> {{ count }}</li>
   </ul>
 
-<h4>Comments from users who checked in:</h4>
+  <h4>Comments from users who checked in:</h4>
 
-<table class="table table-striped">
+  <table class="table table-striped">
     <tbody>
         {% for checkin in checkins %}
         <tr>
+          {% if checkin.comment != "" %}
             <td>{{ checkin.comment }}</td>
         </tr>
-        {% else %}
+          {% endif %}
+          {% else %}
         <tr>
-            <td>No comments in this location.</td>
+            <td>No one has checked into this location.</td>
         </tr>
         {% endfor %}
     </tbody>
-</table>
+  </table>
+
+  <div class="form">
+    <h4>Check in and let others know you were here!</h4>
+    <form action = "{{ url_for('checkin_submission') }}" method="post">
+      <b>Leave a comment</b>(Optional): <input name="comment" type="text" placeholder=""> <br />
+      <button>Check In</button>
+    </form>
+  </div>
+
 
 <div>
+  <a href="{{ url_for('usermain') }}" class="btn btn-default">Back to Homepage</a>
   <a href="{{ url_for('index') }}" class="btn btn-default">Log Out</a>
 </div>
 

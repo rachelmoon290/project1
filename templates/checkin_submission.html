@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block heading %}
-  Search Results
+  Checkin Complete!
 {% endblock %}
 
 {% block body %}
@@ -11,6 +11,7 @@
 <!--need a button that goes back to usermain, or previous page, in a logged in status-->
 
 <div>
-  <a href="{{ url_for('index') }}" class="btn btn-default">Log Out</a>
+  <a href="{{ url_for('usermain') }}" class="btn btn-default">Back to Homepage</a>
+  <a href = "{{ url_for('index') }}" class="btn btn-default">Log Out</a>
 </div>
 {% endblock %}
