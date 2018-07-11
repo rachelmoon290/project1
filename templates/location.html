@@ -11,6 +11,11 @@
     <li><b>Longitude:</b> {{ location.longitude }} </li>
     <li><b>Population:</b> {{ location.population }} </li>
     <li><b>Number of Checkins:</b> {{ count }}</li>
+    <li><b>Weather Summary:</b> {{ weather["currently"]["summary"] }}</li>
+    <li><b>Temperature:</b> {{ weather["currently"]["temperature"] }} °F</li>
+    <li><b>Dew Point:</b> {{ weather["currently"]["dewPoint"] }}</li>
+    <li><b>Humidity:</b> {{ weather["currently"]["humidity"]*100 }} %</li>
+    <li><b>Time of Weather Report:</b> {{ time }}</li>
   </ul>
 
   <h4>Comments from users who checked in:</h4>

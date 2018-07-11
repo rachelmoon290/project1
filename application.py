@@ -1,10 +1,11 @@
-import os
+import os, requests
 
 from flask import Flask, render_template, request, session, redirect, jsonify, abort
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from decimal import Decimal
+import pandas
 
 app = Flask(__name__)
 
@@ -97,7 +98,13 @@ def location(location_id):
     location_info = db.execute("SELECT * FROM location WHERE id = :x", {"x": location_id}).fetchone()
     checkin_info = db.execute("SELECT * FROM checkin WHERE loc = :a", {"a": location_id}).fetchall()
     count = db.execute("SELECT login_id FROM checkin WHERE loc = :a", {"a": location_id}).rowcount
-    return render_template("location.html", location = location_info, checkins = checkin_info, count = count)
+
+    weather_info = requests.get(f"https://api.darksky.net/forecast/d86b65085b6b96eb4d6593f275189892/{location_info.latitude},{location_info.longitude}")
+    weather_info = weather_info.json()
+
+    weather_time = pandas.to_datetime(weather_info["currently"]["time"],unit='s')
+
+    return render_template("location.html", location = location_info, checkins = checkin_info, count = count, weather = weather_info, time = weather_time)
 
 
 @app.route("/checkin_submission", methods=["POST"])
