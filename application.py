@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, jsonify, abort
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from decimal import Decimal
 
 app = Flask(__name__)
 
@@ -112,3 +113,24 @@ def checkin_submission():
         db.execute("INSERT INTO checkin (login_id, loc, comment) VALUES (:a, :b, :c)", {"a": user_id_num[0], "b": loc, "c": comment})
         db.commit()
         return render_template("checkin_submission.html")
+
+
+@app.route("/api/locations/<string:zipcode>")
+def location_api(zipcode):
+
+    if db.execute("SELECT zipcode FROM location WHERE zipcode = :x", {"x": zipcode}).rowcount == 0:
+        abort(404)
+
+    location_info = db.execute("SELECT * FROM location WHERE zipcode = :x", {"x": zipcode}).fetchone()
+    count = db.execute("SELECT login_id FROM checkin WHERE loc = :a", {"a": location_info.id}).rowcount
+    count = Decimal(count)
+
+    return jsonify({
+            "place_name": location_info.city.title(),
+            "state": location_info.state,
+            "latitude": location_info.latitude,
+            "longitude": location_info.longitude,
+            "zip": location_info.zipcode,
+            "population": location_info.population,
+            "check_ins": count
+        })
