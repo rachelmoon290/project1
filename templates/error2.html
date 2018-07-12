@@ -6,5 +6,5 @@
 
 {% block body %}
     <p> {{ message }} </p>
-    <p><a href="{{ url_for(url) }}" class="btn btn-primary" role="button">{{ button }}</a></p>
+    <p><a href="{{ url_for(url, location_id = location_id) }}" class="btn btn-primary" role="button">{{ button }}</a></p>
 {% endblock %}

@@ -6,26 +6,27 @@
 
 {% block body %}
 
-<table class="table table-striped">
-    <thead>
-        <th scope="col">ZIP Code</th>
-        <th scope="col">City</th>
-        <th scope="col">State</th>
-    </thead>
-    <tbody>
+<table class="table table-hover">
+  <thead class="thead-light">
+    <th scope="col" align="center">ZIP Code</th>
+    <th scope="col" align="center">City</th>
+    <th scope="col" align="center">State</th>
+    <th scope="col" align="center">Information</th>
+  </thead>
+  <tbody>
     {% for result in results %}
-        <tr>
-            <th scope="row">{{ result.zipcode }}</th>
-            <td>{{ result.city }}</td>
-            <td>{{ result.state }}</td>
-            <td><a href="{{ url_for('location', location_id = result.id) }}" class="btn btn-info" role="button">Click for more info</a></td>
-        </tr>
+    <tr>
+      <td align="center">{{ result.zipcode }}</td>
+      <td align="center">{{ result.city }}</td>
+      <td align="center">{{ result.state }}</td>
+      <td align="center"><a href="{{ url_for('location', location_id = result.id) }}" class="btn btn-primary" role="button">View Details</a></td>
+    </tr>
     {% endfor %}
-    </tbody>
+  </tbody>
 </table>
 
-
-<div>
-  <a href="{{ url_for('index') }}" class="btn btn-default">Log Out</a>
+<div id = "buttons">
+  <a href="{{ url_for('usermain') }}" class="btn btn-secondary btn-sm" role ="button">Back to Homepage</a>
+  <a class="btn btn-secondary btn-sm" href="{{ url_for('index') }}" role="button">Log Out</a>
 </div>
 {% endblock %}

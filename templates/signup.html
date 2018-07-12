@@ -7,12 +7,27 @@
 {% block body %}
 <div class="form">
   <form action = "{{ url_for('signupsuccess') }}" method="post">
-    <b>First name:</b> <input name="firstname" type="text" placeholder=""> <br />
-    <b>Last name:</b> <input name="lastname" type="text" placeholder=""> <br />
-    <b>ID:</b> <input name="id" type="text" placeholder=""> <br />
-    <b>Password:</b> <input name="password" type="password" placeholder=""> <br />
-    <button>Sign Up</button>
+    <table class="center">
+      <tr>
+        <td align="right"><b>First Name:</b></td>
+        <td align="left"><input name="firstname" type="text" placeholder=""></td>
+      </tr>
+      <tr>
+        <td align="right"><b>Last Name:</b></td>
+        <td align="left"><input name="lastname" type="text" placeholder=""></td>
+      </tr>
+      <tr>
+        <td align="right"><b>ID:</b></td>
+        <td align="left"><input name="id" type="text" placeholder=""> </td>
+      </tr>
+      <tr>
+        <td align="right"><b>Password:</b></td>
+        <td align="left"><input name="password" type="password" placeholder=""></td>
+      </tr>
+    </table> <br />
+    <button type="submit" class="btn btn-primary">Sign Up</button> <br />
     <a href="{{ url_for('index') }}" class="btn btn-default">Back to Homepage</a>
   </form>
 </div>
+
 {% endblock %}

@@ -1,26 +1,55 @@
 {% extends "layout.html" %}
 
 {% block heading %}
-  Search Results: {{ location.city }}, {{ location.state }} {{ location.zipcode }}
+You are in: <font color=#2E8B57>{{ location.city.title() }}, {{ location.state }} {{ location.zipcode }}</font>
 {% endblock %}
 
 {% block body %}
+  <table class = "center table table-striped">
+    <tr>
+      <td align="center"><b>Latitude</b></td>
+      <td align="center">{{ location.latitude }}</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Longitude</b></td>
+      <td align="center">{{ location.longitude }}</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Population</b></td>
+      <td align="center">{{ location.population }}</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Number of Check-ins</b></td>
+      <td align="center">{{ count }}</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Weather Summary</b></td>
+      <td align="center">{{ weather["currently"]["summary"] }}</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Temperature</b></td>
+      <td align="center">{{ weather["currently"]["temperature"] }}°F</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Dew Point</b></td>
+      <td align="center">{{ weather["currently"]["dewPoint"] }}</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Humidity</b></td>
+      <td align="center"> {{ weather["currently"]["humidity"]*100 }}%</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Time of Weather Report</b></td>
+      <td align="center">{{ time }}</td>
+    </tr>
+  </table>
+  <br /><br /><br />
 
-  <ul>
-    <li><b>Latitude:</b> {{ location.latitude }}</li>
-    <li><b>Longitude:</b> {{ location.longitude }} </li>
-    <li><b>Population:</b> {{ location.population }} </li>
-    <li><b>Number of Checkins:</b> {{ count }}</li>
-    <li><b>Weather Summary:</b> {{ weather["currently"]["summary"] }}</li>
-    <li><b>Temperature:</b> {{ weather["currently"]["temperature"] }} °F</li>
-    <li><b>Dew Point:</b> {{ weather["currently"]["dewPoint"] }}</li>
-    <li><b>Humidity:</b> {{ weather["currently"]["humidity"]*100 }} %</li>
-    <li><b>Time of Weather Report:</b> {{ time }}</li>
-  </ul>
-
-  <h4>Comments from users who checked in:</h4>
-
-  <table class="table table-striped">
+  <table class="table table-sm">
+    <thead class="thead-light" style = "font-size:30px">
+      <tr>
+        <th scope="col">Comments</th>
+    </thead>
     <tbody>
         {% for checkin in checkins %}
         <tr>
@@ -30,24 +59,25 @@
           {% endif %}
           {% else %}
         <tr>
-            <td>No one has checked into this location.</td>
+            <td>No one has left comments in this location.</td>
         </tr>
         {% endfor %}
     </tbody>
-  </table>
-
+  </table> </br></br>
+<div class="checkin">
   <div class="form">
-    <h4>Check into this location!</h4>
+    <h2>Check into this location!</h2> </br>
     <form action = "{{ url_for('checkin_submission') }}" method="post">
-      <b>Leave a comment</b>(Optional): <input name="comment" type="text" placeholder=""> <br />
-      <button>Check In</button>
+      <input name="comment" type="text" placeholder="Feel free to leave any comments!" size = "50"> <br /><br />
+      <button type="submit" class="btn btn-primary">Check In</button>
     </form>
   </div>
+</div>
+<br />
 
-
-<div>
-  <a href="{{ url_for('usermain') }}" class="btn btn-default">Back to Homepage</a>
-  <a href="{{ url_for('index') }}" class="btn btn-default">Log Out</a>
+<div id = "buttons">
+  <a href="{{ url_for('usermain') }}" class="btn btn-secondary btn-sm" role ="button">Back to Homepage</a>
+  <a class="btn btn-secondary btn-sm" href="{{ url_for('index') }}" role="button">Log Out</a>
 </div>
 
 {% endblock %}
