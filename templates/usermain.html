@@ -12,12 +12,13 @@
 </div>
 <div class="form">
     <form action = "{{ url_for('locations') }}" method="post">
-      <input name="search" type="text" placeholder="Type ZIP code, name of city or the town." size = "50"><br /><br />
+      <input name="search" type="text" placeholder="Type ZIP code, name of the city/town or state." size = "50"><br /><br />
       <button type="submit" class="btn btn-primary btn-lg">Search</button><br /><br />
     </form>
 </div>
 
 <div id = "buttons">
+  <a href="{{ url_for('usermain') }}" class="btn btn-secondary btn-sm" role ="button">Main Page</a>
   <a class="btn btn-secondary btn-sm" href="{{ url_for('index') }}" role="button">Log Out</a>
 </div>
 {% endblock %}

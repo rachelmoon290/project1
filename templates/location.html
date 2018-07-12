@@ -68,7 +68,7 @@ You are in: <font color=#2E8B57>{{ location.city.title() }}, {{ location.state }
   <div class="form">
     <h2>Check into this location!</h2> </br>
     <form action = "{{ url_for('checkin_submission') }}" method="post">
-      <input name="comment" type="text" placeholder="Feel free to leave any comments!" size = "50"> <br /><br />
+      <input name="comment" type="text" placeholder="Feel free to leave any comments." size = "50"> <br /><br />
       <button type="submit" class="btn btn-primary">Check In</button>
     </form>
   </div>
@@ -76,7 +76,7 @@ You are in: <font color=#2E8B57>{{ location.city.title() }}, {{ location.state }
 <br />
 
 <div id = "buttons">
-  <a href="{{ url_for('usermain') }}" class="btn btn-secondary btn-sm" role ="button">Back to Homepage</a>
+  <a href="{{ url_for('usermain') }}" class="btn btn-secondary btn-sm" role ="button">Main Page</a>
   <a class="btn btn-secondary btn-sm" href="{{ url_for('index') }}" role="button">Log Out</a>
 </div>
 

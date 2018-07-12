@@ -94,7 +94,7 @@ def usermain():
 
         #if ID and password do not match, throw error message and ask users to try logging in again
         else:
-            return render_template("error.html", message="ID and password does not match. Please try again.", url="login", button = "Go Back")
+            return render_template("error.html", message="ID and password do not match. Please try again.", url="login", button = "Go Back")
 
     #if users are visiting this page by GET request, if they are not logged in (by checking their session id information), redirect them to Homepage
     else:
