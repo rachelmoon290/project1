@@ -46,14 +46,14 @@ def signup():
 # Sign-up Success Page
 @app.route("/signupsuccess", methods=["POST"])
 def signupsuccess():
-    #retrieve user information from the sign-up form tne new user submitted
+    #retrieve user information from the sign-up form the new user submitted
     id = request.form.get("id")
     password = request.form.get("password")
     firstname = request.form.get("firstname")
     lastname = request.form.get("lastname")
 
     # if user leaves anything in the form blank, throw error and ask them to try signing up again
-    if id or password or firstname or lastname == '' or None:
+    if id == None or password == None or firstname == None or lastname == None:
         return render_template("error.html", message = "Please fill all sections of the form to sign up.", url = "signup", button = "Go Back")
 
     # if ID already exists in the users database, throw error page and ask users to sign up using different ID
